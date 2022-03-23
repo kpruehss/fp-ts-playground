@@ -39,11 +39,11 @@ const validatePasswordBad = (s: string) =>
   pipe(minLength(s), chain(oneCapital), chain(oneNumber))
 
 // Works but bad UX as each condition fails one at a time
-validatePasswordBad('ab')
+validatePasswordBad('ab') //?
 
 // instead, lets return an array of all errors at once. To do that we need a
 // semigroup and use validation from Either.ts
-// We'll neeed to either rewrite the validation functions to return an array
+// We'll need to either rewrite the validation functions to return an array
 // (bad!)
 // or use a combinator to adjust the current behavior (good!).
 function lift<E, A>(check: (a:A) => Either<E, A>): (a: A) => Either<NonEmptyArray<E>, A> {
@@ -75,4 +75,4 @@ function validatePassword(s:string): Either<NonEmptyArray<string>, string> {
 }
 
 // now we get an array of all errors at once instead
-validatePassword('ab')
+validatePassword('ab') //?
