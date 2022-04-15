@@ -3,7 +3,6 @@ import {
   Either,
   fromPredicate,
   getApplicativeValidation,
-  getValidation,
   left,
   map,
   mapLeft,

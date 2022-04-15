@@ -16,7 +16,7 @@ const foo = {
 pipe(foo, O.fromNullable, O.map(({bar}) => bar), O.match(() => 'empty', (a) => a)) //?
 
 // using fp-ts Array ADT, we cna safely access array items
-const arr: any[]= [2];
+const arr: any[]= [0];
 
 // this function is basically the implementation of A.head
 function safeHead<T>(arr: T[]): O.Option<T> {
@@ -39,4 +39,7 @@ pipe(firstElementDoubled, O.match(
   (some) => `a some containing ${some}`
 )) //?
 
-const oneOverValue = pipe(firstElementDoubled, O.chain(n => n === 0 ? O.none : O.some(1/n))) //?
+const oneOverValue = pipe(firstElementDoubled,
+  O.chain(n => n === 0 ? O.none : O.some(1/n)),
+  O.getOrElse(() => 0)
+) //?
